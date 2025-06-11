@@ -193,7 +193,7 @@ class SocialAuthStateManager implements SocialAuthStateManagerInterface
     /**
      * @inheritDoc
      */
-    public function IsAtCheckout(): bool
+    public function isAtCheckout(): bool
     {
         $identifier = $this->getIdentifier();
 

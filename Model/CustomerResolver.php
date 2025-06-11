@@ -61,7 +61,7 @@ class CustomerResolver implements CustomerResolverInterface
         $customer->setEmail($userInfo['email']);
         $customer->setFirstname($userInfo['first_name']);
         $customer->setLastname($userInfo['last_name']);
-        // TODO: Set random password 
+        // TODO: Set random password
         // TBD: Need to decide whether to send email to user mentioning to reset his/her password
 
         return $this->customerRepository->save($customer);

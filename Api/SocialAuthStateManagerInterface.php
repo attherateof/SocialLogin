@@ -23,6 +23,9 @@ namespace MageStack\SocialLogin\Api;
 /**
  * Interface for managing social auth state across requests.
  *
+ * @class SocialAuthStateManagerInterface
+ * @namespace MageStack\SocialLogin\Api
+ *
  * @api
  */
 interface SocialAuthStateManagerInterface

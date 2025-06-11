@@ -24,6 +24,7 @@ namespace MageStack\SocialLogin\Block;
 use Magento\Framework\View\Element\Template;
 use Magento\Framework\View\Element\Template\Context;
 use MageStack\SocialLogin\Api\OAuthProviderInterface;
+use MageStack\SocialLogin\Api\ConfigInterface;
 
 /**
  * This block class is responsible for providing social auth link
@@ -37,11 +38,14 @@ class Link extends Template
      * Constructor
      *
      * @param OAuthProviderInterface $oAuthProvider
+     * @param ConfigInterface $config
      * @param Context $context
-     * @param array<string|int, mixed> $data Additional data
+     * @param array $data
+     * @phpstan-param array<string|int, mixed> $data
      */
     public function __construct(
         private readonly OAuthProviderInterface $oAuthProvider,
+        private readonly ConfigInterface $config,
         Context $context,
         array $data = [],
     ) {
@@ -66,5 +70,15 @@ class Link extends Template
     public function getRegisterLink()
     {
         return $this->oAuthProvider->getRegisterRedirectUrl();
+    }
+
+    /**
+     * Is social login enabled?
+     *
+     * @return bool
+     */
+    public function isEnabled(): bool
+    {
+        return $this->config->isEnabled();
     }
 }
