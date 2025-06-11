@@ -60,11 +60,25 @@ interface OAuthProviderInterface
     public function getLoginRedirectUrl(): string;
 
     /**
+     * Get login redirect url
+     *
+     * @return string
+     */
+    public function getCheckoutLoginRedirectUrl(): string;
+
+    /**
      * Get register redirect url
      *
      * @return string
      */
     public function getRegisterRedirectUrl(): string;
+
+    /**
+     * Get register redirect url
+     *
+     * @return string
+     */
+    public function getCheckoutRegisterRedirectUrl(): string;
 
     /**
      * Get access token

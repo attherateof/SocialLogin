@@ -40,6 +40,7 @@ class SocialAuthStateManager implements SocialAuthStateManagerInterface
      */
     private const STATE_CACHE_PREFIX = 'social_oauth_state_';
     private const IS_REGISTER_CACHE_PREFIX = 'social_oauth_is_register_';
+    private const IS_AT_CHECKOUT_CACHE_PREFIX = 'social_oauth_is_at_checkout_';
 
     /**
      * Cache TTL
@@ -134,12 +135,13 @@ class SocialAuthStateManager implements SocialAuthStateManagerInterface
     /**
      * @inheritDoc
      */
-    public function setIsRegister(bool $isRegister): self
+    public function setAsRegisterRequest(): self
     {
+        $isRegisterRequest = true;
         $identifier = $this->getIdentifier();
 
         $this->cache->save(
-            (string) (int) $isRegister,
+            (string) (int) $isRegisterRequest,
             self::IS_REGISTER_CACHE_PREFIX . $identifier,
             [],
             self::CACHE_TTL
@@ -168,5 +170,45 @@ class SocialAuthStateManager implements SocialAuthStateManagerInterface
         $identifier = $this->getIdentifier();
 
         $this->cache->remove(self::IS_REGISTER_CACHE_PREFIX . $identifier);
+    }
+
+    /**
+     * @inheritDoc
+     */
+    public function setAsCheckoutRequest(): self
+    {
+        $isAtCheckout = true;
+        $identifier = $this->getIdentifier();
+
+        $this->cache->save(
+            (string) (int) $isAtCheckout,
+            self::IS_AT_CHECKOUT_CACHE_PREFIX . $identifier,
+            [],
+            self::CACHE_TTL
+        );
+
+        return $this;
+    }
+
+    /**
+     * @inheritDoc
+     */
+    public function IsAtCheckout(): bool
+    {
+        $identifier = $this->getIdentifier();
+
+        $value = $this->cache->load(self::IS_AT_CHECKOUT_CACHE_PREFIX . $identifier);
+
+        return $value ? (bool) (int) $value : false;
+    }
+
+    /**
+     * @inheritDoc
+     */
+    public function forgetIsAtCheckout(): void
+    {
+        $identifier = $this->getIdentifier();
+
+        $this->cache->remove(self::IS_AT_CHECKOUT_CACHE_PREFIX . $identifier);
     }
 }
