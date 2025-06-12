@@ -28,7 +28,18 @@ MageStack_SocialLogin is a Magento 2 module designed to streamline the integrati
    -  ``php bin/magento cache:flush``
 
 ## Usage
-This module provides a resuable logics for verius social logins. So implemetning them can be faster and easier. 
+This module provides a resuable logics for verius social logins. So implemetning them can be faster and easier.
+
+## Supported Social login
+    - [Google Login](https://github.com/attherateof/GoogleLogin)
+
+## Upcoming support
+    - Facebook login
+    - Instagram
+    - X
+    - GitHub
+    - LinkedIn
+    - Apple ID
 
 ## Contributing
 If you would like to contribute to this module, feel free to fork the repository and create a pull request. Please make sure to follow the coding standards of Magento 2.
