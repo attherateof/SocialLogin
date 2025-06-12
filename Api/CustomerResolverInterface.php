@@ -22,6 +22,10 @@ declare(strict_types=1);
 namespace MageStack\SocialLogin\Api;
 
 use Magento\Customer\Api\Data\CustomerInterface;
+use Magento\Framework\Exception\NoSuchEntityException;
+use Magento\Framework\Exception\LocalizedException;
+use Magento\Framework\Exception\InputException;
+use Magento\Framework\Exception\State\InputMismatchException;
 
 /**
  * Interface for Customer Resolver
@@ -33,13 +37,17 @@ use Magento\Customer\Api\Data\CustomerInterface;
  */
 interface CustomerResolverInterface
 {
-
     /**
      * Load customer by email
      *
      * @param string $email
+     *
+     * @return CustomerInterface
+     *
+     * @throws NoSuchEntityException
+     * @throws LocalizedException
      */
-    public function getCustomer(string $email): ?CustomerInterface;
+    public function getCustomer(string $email): CustomerInterface;
 
     /**
      * Create a new customer
@@ -47,6 +55,10 @@ interface CustomerResolverInterface
      * @param string[] $userInfo
      *
      * @return CustomerInterface
+     *
+     * @throws InputException
+     * @throws InputMismatchException
+     * @throws LocalizedException
      */
     public function createCustomer(array $userInfo): CustomerInterface;
 }

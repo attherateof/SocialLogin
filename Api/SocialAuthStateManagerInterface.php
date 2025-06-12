@@ -20,6 +20,8 @@ declare(strict_types=1);
 
 namespace MageStack\SocialLogin\Api;
 
+use LogicException;
+
 /**
  * Interface for managing social auth state across requests.
  *
@@ -45,7 +47,7 @@ interface SocialAuthStateManagerInterface
     /**
      * Get the previously set identifier.
      *
-     * @throws \LogicException If identifier is not set.
+     * @throws LogicException If identifier is not set.
      * @return string
      */
     public function getIdentifier(): string;
@@ -64,7 +66,7 @@ interface SocialAuthStateManagerInterface
     /**
      * Retrieve the stored state token.
      *
-     * @throws \LogicException If state is not set.
+     * @throws LogicException If state is not set.
      * @return string
      */
     public function getState(): string;

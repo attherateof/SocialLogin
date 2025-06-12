@@ -60,13 +60,9 @@ class SocialAuthService implements SocialAuthServiceInterface
     /**
      * @inheritDoc
      */
-    public function resolveCustomer(OAuthProviderInterface $provider, string $code): ?CustomerInterface
+    public function resolveCustomer(OAuthProviderInterface $provider, string $code): CustomerInterface
     {
         $token = $provider->getAccessToken($code);
-        if (!$token) {
-            throw new RuntimeException('Failed to fetch access token.');
-        }
-
         $userInfo = $provider->getUserInfo($token);
         if (empty($userInfo['email'])) {
             throw new RuntimeException('Failed to fetch user info or missing email.');
@@ -74,7 +70,7 @@ class SocialAuthService implements SocialAuthServiceInterface
 
         $customer = $this->socialAuth->getCustomer($userInfo['email']);
 
-        if ($this->authState->isRegister() && !$customer instanceof CustomerInterface) {
+        if ($this->authState->isRegister()) {
             $customer = $this->socialAuth->createCustomer($userInfo);
         }
 

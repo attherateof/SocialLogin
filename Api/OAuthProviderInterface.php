@@ -21,6 +21,8 @@ declare(strict_types=1);
 
 namespace MageStack\SocialLogin\Api;
 
+use Magento\Framework\Exception\NoSuchEntityException;
+
 /**
  * Interface for OAuth Provider
  *
@@ -85,9 +87,11 @@ interface OAuthProviderInterface
      *
      * @param string $code
      *
-     * @return null|string
+     * @return string
+     *
+     * @throws NoSuchEntityException;
      */
-    public function getAccessToken(string $code): ?string;
+    public function getAccessToken(string $code): string;
 
     /**
      * Get user information

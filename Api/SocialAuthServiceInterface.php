@@ -22,6 +22,7 @@ declare(strict_types=1);
 namespace MageStack\SocialLogin\Api;
 
 use Magento\Customer\Api\Data\CustomerInterface;
+use RuntimeException;
 
 /**
  * Interface for Social Authentication Service
@@ -49,9 +50,9 @@ interface SocialAuthServiceInterface
      * @param OAuthProviderInterface $provider
      * @param string $code
      *
-     * @throws \RuntimeException
+     * @return CustomerInterface
      *
-     * @return CustomerInterface|null
+     * @throws RuntimeException
      */
-    public function resolveCustomer(OAuthProviderInterface $provider, string $code): ?CustomerInterface;
+    public function resolveCustomer(OAuthProviderInterface $provider, string $code): CustomerInterface;
 }

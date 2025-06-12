@@ -25,7 +25,6 @@ use MageStack\SocialLogin\Api\CustomerResolverInterface;
 use Magento\Customer\Api\Data\CustomerInterfaceFactory;
 use Magento\Customer\Api\CustomerRepositoryInterface;
 use Magento\Customer\Api\Data\CustomerInterface;
-use Magento\Framework\Exception\NoSuchEntityException;
 
 class CustomerResolver implements CustomerResolverInterface
 {
@@ -42,13 +41,9 @@ class CustomerResolver implements CustomerResolverInterface
     /**
      * @inheritDoc
      */
-    public function getCustomer(string $email): ?CustomerInterface
+    public function getCustomer(string $email): CustomerInterface
     {
-        try {
-            return $this->customerRepository->get($email);
-        } catch (NoSuchEntityException $e) {
-            return null;
-        }
+        return $this->customerRepository->get($email);
     }
 
     /**
