@@ -26,6 +26,12 @@ use Magento\Customer\Api\Data\CustomerInterfaceFactory;
 use Magento\Customer\Api\CustomerRepositoryInterface;
 use Magento\Customer\Api\Data\CustomerInterface;
 
+/**
+ * Resolves custmer for social auth
+ * 
+ * @class CustomerResolver
+ * @namespace MageStack\SocialLogin\Model
+ */
 class CustomerResolver implements CustomerResolverInterface
 {
     /**

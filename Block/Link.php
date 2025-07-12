@@ -23,8 +23,7 @@ namespace MageStack\SocialLogin\Block;
 
 use Magento\Framework\View\Element\Template;
 use Magento\Framework\View\Element\Template\Context;
-use MageStack\SocialLogin\Api\OAuthProviderInterface;
-use MageStack\SocialLogin\Api\ConfigInterface;
+use MageStack\SocialLogin\Model\CompositeSocialLinkBuilder;
 
 /**
  * This block class is responsible for providing social auth link
@@ -37,48 +36,31 @@ class Link extends Template
     /**
      * Constructor
      *
-     * @param OAuthProviderInterface $oAuthProvider
-     * @param ConfigInterface $config
+     * @param CompositeSocialLinkBuilder $compositeSocialLinkBuilder
      * @param Context $context
      * @param array $data
      * @phpstan-param array<string|int, mixed> $data
      */
     public function __construct(
-        private readonly OAuthProviderInterface $oAuthProvider,
-        private readonly ConfigInterface $config,
+        private readonly CompositeSocialLinkBuilder $compositeSocialLinkBuilder,
         Context $context,
         array $data = [],
     ) {
         parent::__construct($context, $data);
     }
 
-    /**
-     * Get login redirect link
-     *
-     * @return string
-     */
-    public function getLoginLink()
+    public function getLoginLinks(): array
     {
-        return $this->oAuthProvider->getLoginRedirectUrl();
+        return $this->compositeSocialLinkBuilder->setIsForLogin(true)->getAuthProviders();
     }
 
-    /**
-     * Get register redirect link
-     *
-     * @return string
-     */
-    public function getRegisterLink()
+    public function getRegisterLinks(): array
     {
-        return $this->oAuthProvider->getRegisterRedirectUrl();
+        return $this->compositeSocialLinkBuilder->setIsForRegister(true)->getAuthProviders();
     }
 
-    /**
-     * Is social login enabled?
-     *
-     * @return bool
-     */
-    public function isEnabled(): bool
+    public function labelFormatter(string $label): string
     {
-        return $this->config->isEnabled();
+        return ucfirst(strtolower($label));
     }
 }

@@ -1,0 +1,38 @@
+<?php
+/**
+ * Copyright © 2025 MageStack. All rights reserved.
+ * See COPYING.txt for license details.
+ *
+ * DISCLAIMER
+ *
+ * Do not make any kind of changes to this file if you
+ * wish to upgrade this extension to newer version in the future.
+ *
+ * @category  MageStack
+ * @package   MageStack_GoogleLogin
+ * @author    Amit Biswas <amit.biswas.webdeveloper@gmail.com>
+ * @copyright 2025 MageStack
+ * @license   https://opensource.org/licenses/MIT  MIT License
+ * @link      https://github.com/attherateof/GoogleLogin
+ */
+
+use Magento\Framework\Escaper;
+use MageStack\SocialLogin\Block\Link;
+
+/**
+ * @var Escaper $escaper
+ * @var Link $block
+ */
+
+$loginLinks = $block->getRegisterLinks();
+?>
+
+<?php if (!empty($loginLinks)): ?>
+    <?php foreach ($loginLinks as $provider => $data): ?>
+        <?php if ($data['is_enabled']): ?>
+            <a href="<?= $escaper->escapeHtmlAttr($data['url']['register']) ?>" class="action register primary">
+                <?= $escaper->escapeHtml($this->labelFormatter($provider)) ?>
+            </a>
+        <?php endif; ?>
+    <?php endforeach; ?>
+<?php endif; ?>

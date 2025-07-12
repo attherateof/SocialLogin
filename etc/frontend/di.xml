@@ -1,0 +1,29 @@
+<?xml version="1.0"?>
+<!--
+/**
+ * Copyright © 2025 MageStack. All rights reserved.
+ * See COPYING.txt for license details.
+ *
+ * DISCLAIMER
+ *
+ * Do not make any kind of changes to this file if you
+ * wish to upgrade this extension to newer version in the future.
+ *
+ * @category  MageStack
+ * @package   MageStack_SocialLogin
+ * @author    Amit Biswas <amit.biswas.webdeveloper@gmail.com>
+ * @copyright 2025 MageStack
+ * @license   https://opensource.org/licenses/MIT  MIT License
+ * @link      https://github.com/attherateof/SocialLogin
+ */
+-->
+<config xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance"
+    xsi:noNamespaceSchemaLocation="urn:magento:framework:ObjectManager/etc/config.xsd">
+    <type name="Magento\Checkout\Model\CompositeConfigProvider">
+        <arguments>
+            <argument name="configProviders" xsi:type="array">
+                <item name="magestack_social_checkout_config_provider" xsi:type="object">MageStack\SocialLogin\Model\Checkout\CheckoutConfigProvider</item>
+            </argument>
+        </arguments>
+    </type>
+</config>

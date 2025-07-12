@@ -36,7 +36,7 @@ interface ConfigInterface
      *
      * @return bool
      */
-    public function isEnabled(): bool;
+    public function isEnabled(?int $webSiteId = null): bool;
 
     /**
      * Get client key
@@ -51,4 +51,11 @@ interface ConfigInterface
      * @return string
      */
     public function getClientSecret(): string;
+
+    /**
+     * Get frontend label for link
+     *
+     * @return string
+     */
+    public function getFrontendLabel(?int $storeId = null): string;
 }
